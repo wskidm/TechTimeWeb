@@ -1,0 +1,13 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h4>Please choose your employee record:</h4>
+
+<form asp-action="Login" method="post">
+    <p>
+        <select asp-for="EmployeeId" asp-items="Model.Employees"></select>
+    </p>
+    <button type="submit">Login</button>
+</form>

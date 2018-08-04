@@ -1,0 +1,39 @@
+﻿@model TimeViewModel
+@{
+    ViewData["Title"] = "Add Time";
+}
+
+@if (Model.message != null && !string.IsNullOrEmpty(Model.message)) {
+<p>@Model.message</p>
+}
+
+<h4>Please enter your time:</h4>
+
+<form asp-action="Index" method="post">
+    <div>
+        <label asp-for="eventTypeId">Event Type:</label>
+        <select asp-for="eventTypeId" asp-items="Model.eventTypes"></select>
+    </div>
+    <div>
+        <label asp-for="eventDateTime">Date/Time:</label>
+        <input asp-for="eventDateTime"></input>
+    </div>
+    <div>
+        <label asp-for="jobId">Job Type:</label>
+        <select asp-for="jobId" asp-items="Model.jobTypes"></select>
+    </div>
+    <div>
+        <label asp-for="note">Note:</label>
+        <textarea asp-for="note"></textarea>
+    </div>
+    <p>&nbsp;</p>
+    <button type="submit">Enter</button>
+</form>
+
+@section Scripts {
+<script type="text/javascript">
+    $(function () {
+        $("#eventDateTime").datetimepicker();
+    });
+</script>
+}
