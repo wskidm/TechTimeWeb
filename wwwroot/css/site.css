@@ -26,6 +26,23 @@
     margin: 15px;
 }
 
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    height: 100%;
+}
+
+    .menu a {
+        width: 40%;
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid black;
+        box-shadow: 2px 2px 5px 1px rgba(155,155,155,0.5);
+        text-align: center;
+        font-weight: 700;
+    }
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */

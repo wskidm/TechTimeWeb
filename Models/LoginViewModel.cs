@@ -12,11 +12,11 @@ namespace TechTime.Models
 
         public LoginViewModel() { }
 
-        public LoginViewModel(List<Employee> emps)
+        public LoginViewModel(List<Employee> emps, Dictionary<int, string> employeeNames)
         {
             Employees = new List<SelectListItem>(
-                emps.Select(x =>
-                    new SelectListItem($"{x.FirstName} {x.LastName}",
+                emps.Where(z => employeeNames.ContainsKey(z.EmployeeId)).Select(x =>
+                    new SelectListItem(employeeNames[x.EmployeeId],
                     x.EmployeeId.ToString())));
         }
     }

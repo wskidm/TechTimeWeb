@@ -1,0 +1,24 @@
+﻿@model MenuViewModel
+@{
+    ViewData["Title"] = "Main Menu";
+}
+
+<div class="menu">
+    <a href="./event/Select Job">Select Job</a>
+    @if (!Model.IsShort)
+    {
+        <a href="./event/Rest Break">Rest Break</a>
+    }
+    <a href="./event/Shop Maintenance">Shop Maintenance</a>
+    <a href="./event/Wait for Authorization">Wait for Authorization</a>
+    <a href="./event/Wait for Parts">Wait for Parts</a>
+    <a href="./event/Wait for Vehicle">Wait for Vehicle</a>
+    <a href="./event/Administration">Administration</a>
+    @if (!Model.IsShort)
+    {
+        <a href="./event/Lunch Break">Lunch Break</a>
+        <a href="./event/Extended Break">Extended Break</a>
+        <a href="./event/End Day">End Day</a>
+    }
+    <a href="./logout">Logout</a>
+</div>

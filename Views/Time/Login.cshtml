@@ -7,7 +7,7 @@
 
 <form asp-action="Login" method="post">
     <p>
-        <select asp-for="EmployeeId" asp-items="Model.Employees"></select>
+        <select asp-for="EmployeeId" asp-display="EmployeeName" asp-items="Model.Employees"></select>
     </p>
     <button type="submit">Login</button>
 </form>

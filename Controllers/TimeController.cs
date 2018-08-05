@@ -16,14 +16,25 @@ namespace TechTime.Controllers
         private ShopMgtContext shopContext;
         private TechTimeContext ttContext;
 
+        private Dictionary<int, string> employeeNames;
+
         public TimeController(ShopMgtContext shopMgtContext, TechTimeContext techTimeContext) : base()
         {
             shopContext = shopMgtContext;
             ttContext = techTimeContext;
+
+            employeeNames = new Dictionary<int, string>()
+            {
+                {1, "Tammy" },
+                {2, "Bill" },
+                {4, "Thad" },
+                {8, "Robert" },
+                {12, "Steve" }
+            };
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Event(string id)
         {
             if (!IsLoggedIn)
             {
@@ -40,7 +51,7 @@ namespace TechTime.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(TimeViewModel model)
+        public IActionResult Event(TimeViewModel model)
         {
             if (!IsLoggedIn)
             {
@@ -70,6 +81,16 @@ namespace TechTime.Controllers
             return View(model);
         }
 
+        public IActionResult Menu()
+        {
+            if (!IsLoggedIn)
+            {
+                return Redirect("Login");
+            }
+
+            return View(new MenuViewModel { IsShort = false });
+        }
+
         private void populateTimeModel(TimeViewModel model)
         {
             model.eventTypes = ttContext.EventTypes.Select(x => new SelectListItem(x.Name, x.EventTypeId.ToString())).ToList();
@@ -81,14 +102,15 @@ namespace TechTime.Controllers
         {
             if (IsLoggedIn)
             {
-                return Redirect("Index");
+                return Redirect("Menu");
             }
 
             return View(
                 new LoginViewModel(
                     shopContext.Employee.Where(x => !(x.Inactive || x.Deleted))
                         .OrderBy(y => y.LastName).ThenBy(z => z.FirstName)
-                        .Select(x => x).ToList()));
+                        .Select(x => x).ToList(),
+                employeeNames));
         }
 
         [HttpPost]
@@ -98,8 +120,15 @@ namespace TechTime.Controllers
             {
                 HttpContext.Session.SetInt32("employeeId", Convert.ToInt32(model.EmployeeId));
 
-                return Redirect("Index");
+                return Redirect("Menu");
             }
+
+            return Redirect("Login");
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
 
             return Redirect("Login");
         }

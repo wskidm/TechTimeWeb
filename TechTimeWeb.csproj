@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Time\Index.cshtml">
+    <Content Update="Views\Time\Event.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Time\Login.cshtml">
