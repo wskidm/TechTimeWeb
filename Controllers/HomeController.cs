@@ -9,7 +9,7 @@ namespace TechTime.Controllers
     {
         public IActionResult Index()
         {
-            return Redirect("./time/login");
+            return Redirect("~/time/login");
         }
 
         public IActionResult About()
